@@ -2,6 +2,7 @@ const userModel = require("../models/user.model");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 exports.register = async function (req, res) {
   try {
@@ -37,10 +38,9 @@ exports.login = async function (req, res) {
     } else {
       let token = jwt.sign(
         { id: user._id, email: user.email, role: user.role },
-        // process.env.SECRET_KEY
-        "SECRETKEY"
+        process.env.SECRET_KEY
       );
-      console.log(token);
+      // console.log(token);
       return res.json({
         messag: "user login successfully",
         user: { name: user.name, email: user.email, jwt: token },

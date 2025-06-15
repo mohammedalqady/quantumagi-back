@@ -13,8 +13,6 @@ module.exports = (req, res, next) => {
         .send({ error: "Access denied. No Access Token provided." });
     }
     const valid = jwt.verify(accessToken, process.env.SECRET_KEY);
-    // const valid = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
-    // const valid = jwt.verify(accessToken, "SECRETKEY");
     // console.log({ message: valid });
     req.user = valid;
     next();
